@@ -58,7 +58,7 @@ class DefaultLayout extends Component {
             <AppSidebarMinimizer />
           </AppSidebar>
           <main className="main">
-            <BTConsumer>{val => console.log(val)}</BTConsumer>
+            <BTConsumer>{val => <h1>{JSON.stringify(val)}</h1>}</BTConsumer>
           </main>
           <AppAside fixed>
             <Suspense fallback={this.loading()}>

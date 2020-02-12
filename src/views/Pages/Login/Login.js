@@ -28,7 +28,7 @@ class Login extends Component {
                     <Form>
                       <h1>Login</h1>
                       <p className="text-muted">Sign In to your account</p>
-                      <InputGroup className="mb-3">
+                      {/* <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="icon-user"></i>
@@ -51,7 +51,7 @@ class Login extends Component {
                           placeholder="Password"
                           autoComplete="current-password"
                         />
-                      </InputGroup>
+                      </InputGroup> */}
                       <Row>
                         <Col xs="6">
                           <Button
@@ -59,13 +59,13 @@ class Login extends Component {
                             className="px-4"
                             onClick={this.props.onReadBatteryLevelButtonClick}
                           >
-                            Login
+                            Login with Bluetooth
                           </Button>
                         </Col>
                         <Col xs="6" className="text-right">
-                          <Button color="link" className="px-0">
+                          {/* <Button color="link" className="px-0">
                             Forgot password?
-                          </Button>
+                          </Button> */}
                         </Col>
                       </Row>
                     </Form>
@@ -73,7 +73,8 @@ class Login extends Component {
                 </Card>
                 <Card
                   className="text-white bg-primary py-5 d-md-down-none"
-                  style={{ width: "44%" }}
+                  style={{ width: "44%", display: "none" }}
+                  hidden
                 >
                   <CardBody className="text-center">
                     <div>
