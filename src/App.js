@@ -6,7 +6,7 @@ import { BTProvider } from "./helpers/btContext";
 import "./App.scss";
 import {
   onReadBatteryLevelButtonClick,
-  onStartNotificationsButtonClick
+  onStartNotificationsButtonClick,
 } from "./helpers/bt";
 
 const loading = () => (
@@ -25,7 +25,7 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         authed === true ? (
           <Component {...props} authed={authed} />
         ) : (
@@ -42,7 +42,7 @@ const PublicRoute = ({ component: Component, authed, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         authed === false ? (
           <Component {...props} />
         ) : (
@@ -57,13 +57,15 @@ const App = () => {
   const [battery, setBattery] = useState(50);
   const user = { name: "Tania", loggedIn: true };
 
-  const handleBatteryLevelChanged = event => {
+  const handleBatteryLevelChanged = (event) => {
     let batteryLevel = event.target.value.getUint8(0);
     console.warn("> Battery Level is " + batteryLevel + "%");
     setBattery(batteryLevel);
+    onStartNotificationsButtonClick();
+    setAuthed(true);
   };
   const onLogin = () => {
-    onReadBatteryLevelButtonClick(handleBatteryLevelChanged).then(value => {
+    onReadBatteryLevelButtonClick(handleBatteryLevelChanged).then((value) => {
       console.log({ value });
       onStartNotificationsButtonClick();
       setAuthed(true);
@@ -78,7 +80,7 @@ const App = () => {
             authed={authed}
             path="/login"
             name="Login Page"
-            component={props => (
+            component={(props) => (
               <Login
                 {...{ ...props, onReadBatteryLevelButtonClick: onLogin }}
               />
@@ -88,27 +90,27 @@ const App = () => {
             authed
             path="/register"
             name="Register Page"
-            component={props => <Register {...props} />}
+            component={(props) => <Register {...props} />}
           />
           <PrivateRoute
             authed={authed}
             exact
             path="/404"
             name="Page 404"
-            component={props => <Page404 {...props} />}
+            component={(props) => <Page404 {...props} />}
           />
           <PrivateRoute
             authed={authed}
             exact
             path="/500"
             name="Page 500"
-            component={props => <Page500 {...props} />}
+            component={(props) => <Page500 {...props} />}
           />
           <PrivateRoute
             authed={authed}
             path="/"
             name="Home"
-            component={props => <DefaultLayout {...props} />}
+            component={(props) => <DefaultLayout {...props} />}
           />
         </Switch>
       </BrowserRouter>
@@ -116,7 +118,7 @@ const App = () => {
   );
 };
 
-export default props => (
+export default (props) => (
   <React.Suspense fallback={loading()}>
     <App {...props} />
   </React.Suspense>
